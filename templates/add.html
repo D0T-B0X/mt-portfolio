@@ -1,0 +1,36 @@
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block styles %}
+  {{ super() }}
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Borel&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Play:wght@700&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block title %}Add Project{% endblock %}
+
+{% block content %}
+{% if status: %}
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <h1 class="heading-add">Add a Project</h1>
+        </div>
+        <div class="row">
+            {{ ckeditor.load_code_theme() }}
+            {{ ckeditor.load() }}
+            {{ ckeditor.config(name='content') }}
+            {{ wtf.quick_form(form, novalidate=True, button_map={'submit': 'primary'}) }}
+        </div>
+    </div>
+</div>
+{% else: %}
+  <div class="container">
+    <div class="row">
+      <h1>You need to be logged in to access this page.</h1>
+    </div>
+  </div>
+{% endif %}
+{% endblock %}
